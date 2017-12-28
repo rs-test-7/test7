@@ -1,0 +1,49 @@
+body {
+    background-color: #303030;
+	
+	padding: 0 80px;
+    margin: 0;
+}
+
+header {
+    background-color: #212121;
+    line-height: 96px;
+}
+
+header h1 {
+    color: #e0e0e0;
+    font-size: 24px;
+    font-family: 'Roboto';
+    margin: 0;
+    padding: 0 96px;
+}
+
+input, textarea, select {
+    display: block;
+    margin-top: 20px;
+    padding: 5px 10px;
+
+    border: 1px solid #fff;
+
+    background-color: #303030;
+
+    color: #fff;
+}
+
+input, select {
+    height: 30px;
+    min-width: 300px;
+}
+
+textarea {
+    min-width: 600px;
+    min-height: 280px;
+}
+
+button {
+    margin-top: 30px;
+}
+
+.error {
+    color: red;
+}
