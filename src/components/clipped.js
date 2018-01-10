@@ -1,9 +1,7 @@
-import React, {PropTypes, PureComponent} from 'react';
+import React, {PureComponent} from 'react';
 import {v4} from 'uuid';
 
 export default class Clipped extends PureComponent {
-   //todo propTypes
-
     _id = v4();
 
     render() {
@@ -27,8 +25,6 @@ export default class Clipped extends PureComponent {
 };
 
 export class RectClipped extends PureComponent {
-    //todo propTypes
-
     render() {
         const {x, y, width, height, children} = this.props;
 
@@ -39,4 +35,3 @@ export class RectClipped extends PureComponent {
         );
     }
 }
-

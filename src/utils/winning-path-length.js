@@ -4,6 +4,7 @@ export default function winningPathLength(game, visited = {}) {
     if (visited[game.id]) {
         return 0;
     }
+
     visited[game.id] = true;
 
     return (

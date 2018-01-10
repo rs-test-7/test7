@@ -1,7 +1,6 @@
 body {
     background-color: #303030;
-	
-	padding: 0 80px;
+
     margin: 0;
 }
 
@@ -46,4 +45,34 @@ button {
 
 .error {
     color: red;
+}
+
+.tours {
+    position: absolute;
+}
+
+.tour {
+    display: inline-block;
+
+    color: #757575;
+    font-size: 16px;
+    font-weight: bold;
+
+    border-left: 1px solid #212121;
+
+    padding-top: 45px;
+    padding-left: 30px;
+}
+
+.tour.dark {
+    background-color: #2c2c2c;
+}
+
+.tour.light {
+    background-color: #303030;
+}
+
+.tour.dark:last-child,
+.tour.light:last-child {
+    border-right: 1px solid #212121;
 }

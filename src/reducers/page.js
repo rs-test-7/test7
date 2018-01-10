@@ -6,7 +6,6 @@ const initialState = {
 };
 
 export default function page(state = initialState, action) {
-    console.log(action);
     switch (action.type) {
         case actions.CHANGE_TITLE:
             return {...state, title: action.title};

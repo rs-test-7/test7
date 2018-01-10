@@ -15,13 +15,16 @@ const gameComponent = props => {
 
 class TournamentBracket extends Component {
     render() {
-        const tournament = this.props.tournament;
+        const tournament = this.props.tournament,
+            tours = tournament.tours;
+
         const {gameComponent: GameComponent} = this;
 
         return tournament.tours.length === 0 ?
             <Redirect to='/'/> :
             <div>
-                <BracketGenerator GameComponent={GameComponent} games={JSOG.decode(tournament.bracketModel)}/>
+                <BracketGenerator GameComponent={GameComponent} tournamentType={tournament.type} tours={tours}
+                                  games={JSOG.decode(tournament.bracketModel)}/>
             </div>
     }
 }

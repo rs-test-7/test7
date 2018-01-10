@@ -1,43 +1,58 @@
-import React, {PropTypes, PureComponent} from "react";
+import React, {PureComponent} from "react";
 import controllable from "react-controllables";
 import _ from "underscore";
-// import moment from "moment";
 
 import {RectClipped} from "./clipped";
 import {teamOwner, teamGuest} from "./game-shape";
 
 class BracketGame extends PureComponent {
-    //todo propTypes
-
     static defaultProps = {
         homeOnTop: true,
         styles: {
+            tourWidth: 256,
+            gameWidth: 210,
+            gameViewBox: '0 0 190 82',
             backgroundColor: '#484848',
             scoreBackground: '#757575',
             winningScoreBackground: '#ccc',
             teamNameStyle: {fill: '#fff', fontSize: 12, textShadow: '1px 1px 1px #222'},
             teamScoreStyle: {fill: '#23252d', fontSize: 12},
-            teamSeparatorStyle: {stroke: '#2c2c2c', strokeWidth: 1}
+            teamSeparatorStyle: {stroke: '#2c2c2c', strokeWidth: 1},
+            matchIdStyle: {fill: '#ccc', fontSize: 12}
         }
     };
 
     render() {
         const {
             game,
-
+            x,
+            tournamentType,
             styles: {
+                tourWidth,
+                gameWidth,
+                gameViewBox,
                 backgroundColor,
                 scoreBackground,
                 winningScoreBackground,
                 teamNameStyle,
                 teamScoreStyle,
-                teamSeparatorStyle
-            },
+                teamSeparatorStyle,
+                matchIdStyle
+                },
 
             homeOnTop,
 
             ...rest
-        } = this.props;
+            } = this.props;
+
+        //TODO закончить для de
+        //const isPaired = number => !(number % 2);
+
+        //положение матча
+        //let xValue = tournamentType === 0 ? x : game.isLower ? x + tourWidth :
+        //    game.tour > 2 && !isPaired(game.tour) ? x : x - tourWidth;
+
+        let xValue = x;
 
         const {sides} = game;
 
@@ -57,7 +72,7 @@ class BracketGame extends PureComponent {
 
             return (
                 <g>
-                    <rect x={x} y={y} height={22.5} width={200} fillOpacity={0}>
+                    <rect x={x} y={y} height={22.5} width={gameWidth} fillOpacity={0}>
                         {tooltip}
                     </rect>
 
@@ -77,21 +92,15 @@ class BracketGame extends PureComponent {
         };
 
         return (
-            <svg width="200" height="82" viewBox="0 0 200 82" {...rest}>
-                {/*фон матча*/}
-                <rect x="0" y="12" width="200" height="45" fill={backgroundColor} rx="3" ry="3"/>
+            <svg width={gameWidth} height="80" viewBox={gameViewBox} x={xValue} {...rest}>
+                <rect x="0" y="12" width={gameWidth} height="45" fill={backgroundColor} rx="3" ry="3"/>
 
-                {/*фон верхней команды*/}
-                <rect x="0" y="12" width="200" height="22.5" fill={backgroundColor}
-                      rx="3"
-                      ry="3"/>
+                <rect x="0" y="12" width={gameWidth} height="22.5" fill={backgroundColor} rx="3" ry="3"/>
 
-                {/*фон нижней команды*/}
-                <rect x="0" y="34.5" width="200" height="22.5"
+                <rect x="0" y="34.5" width={gameWidth} height="22.5"
                       fill={backgroundColor}
                       rx="3" ry="3"/>
 
-                {/*фон счета*/}
                 <rect x="0" y="12" width="30" height="45" fill={scoreBackground} rx="3" ry="3"/>
 
                 {winnerBackground}
@@ -108,10 +117,14 @@ class BracketGame extends PureComponent {
                     ) : null
                 }
 
-                <line x1="0" y1="34.5" x2="200" y2="34.5" style={teamSeparatorStyle}/>
+                <line x1="0" y1="34.5" x2={gameWidth} y2="34.5" style={teamSeparatorStyle}/>
+
+                <text x="-20" y="40" textAnchor="middle" style={matchIdStyle}>
+                    { game.id }
+                </text>
             </svg>
         );
     }
 }
 
-export default controllable(BracketGame, ['hoveredTeamId']);
+export default BracketGame;
